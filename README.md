@@ -152,7 +152,7 @@ docker compose up --build
 
 | Role | Email | Password |
 | :--- | :--- | :--- |
-| **Demo User** | `demo@commitguard.com` | `Password123!` |
+| **Demo User** | `rahul@example.com` | `Password123!` |
 
 *You can also click the **"Log In with Sandbox Demo Account"** button on the Login page for instant one-click access.*
 
