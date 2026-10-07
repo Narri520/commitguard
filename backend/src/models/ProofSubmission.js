@@ -7,6 +7,12 @@ const proofSubmissionSchema = new mongoose.Schema(
     proofType: { type: String, enum: ['image', 'text', 'location', 'qr', 'manual'], required: true },
     fileUrl: { type: String },
     textContent: { type: String },
+    // Geolocation verification metadata
+    userLatitude: { type: Number },
+    userLongitude: { type: Number },
+    gpsAccuracy: { type: Number },
+    distanceMeters: { type: Number },
+    locationVerified: { type: Boolean, default: false },
     submittedAt: { type: Date, default: Date.now },
     verificationId: { type: mongoose.Schema.Types.ObjectId, ref: 'VerificationResult' }
   },
@@ -24,6 +30,14 @@ const verificationResultSchema = new mongoose.Schema(
     reason: { type: String, required: true },
     status: { type: String, enum: ['VERIFIED', 'NEEDS_REVIEW', 'REJECTED'], required: true },
     provider: { type: String, default: 'PythonAIProvider' },
+    targetLatitude: { type: Number },
+    targetLongitude: { type: Number },
+    userLatitude: { type: Number },
+    userLongitude: { type: Number },
+    distanceMeters: { type: Number },
+    gpsAccuracy: { type: Number },
+    allowedRadius: { type: Number },
+    locationVerified: { type: Boolean, default: false },
     verifiedAt: { type: Date, default: Date.now }
   },
   { timestamps: true }
@@ -32,3 +46,4 @@ const verificationResultSchema = new mongoose.Schema(
 const VerificationResult = mongoose.model('VerificationResult', verificationResultSchema);
 
 module.exports = { ProofSubmission, VerificationResult };
+

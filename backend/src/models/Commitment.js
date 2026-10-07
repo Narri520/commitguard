@@ -5,6 +5,18 @@ const commitmentSchema = new mongoose.Schema(
     userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true, index: true },
     title: { type: String, required: true, trim: true },
     description: { type: String, default: '' },
+    type: {
+      type: String,
+      enum: ['NORMAL', 'LOCATION_BASED'],
+      default: 'NORMAL',
+      index: true
+    },
+    location: {
+      name: { type: String, default: null },
+      latitude: { type: Number, default: null },
+      longitude: { type: Number, default: null },
+      radiusMeters: { type: Number, default: 100 }
+    },
     category: {
       type: String,
       enum: ['Health', 'Study', 'Fitness', 'Work', 'Personal', 'Habits', 'Other'],
@@ -58,3 +70,4 @@ const commitmentSchema = new mongoose.Schema(
 );
 
 module.exports = mongoose.model('Commitment', commitmentSchema);
+
